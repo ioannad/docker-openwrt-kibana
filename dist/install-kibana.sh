@@ -32,16 +32,20 @@ else echo "SHA1SUM FAILED!!!"
      exit 1
 fi
 
-# install kibana 
+# install kibana:
 
 tar -xvzf "/${KIBANA_FILE}"
 mv -f /${KIBANA_ARTIFACT}/* "$KIBANA_HOME"
+
+# aliasing the host name
+
 sed -i '1s/$/\nalias hostname="echo $HOSTNAME"/' "${KIBANA_HOME}/bin/kibana"
-chown -R "${ELASTIC_USER}:${KIBANA_GROUP}" "$KIBANA_HOME"
 
+# chown $kibana_home
+chown -R "${KIBANA_USER}:${KIBANA_GROUP}" "$KIBANA_HOME"
+
+# remove unecessary packages and files
 opkg remove shadow-groupadd shadow-useradd
-
-# clean unnecessary files
 rm /tmp/opkg-lists/* 
 rm "/${KIBANA_FILE}"
 rm "/${KIBANA_FILE}.sha1"
