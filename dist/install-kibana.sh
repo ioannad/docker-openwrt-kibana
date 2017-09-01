@@ -45,7 +45,6 @@ sed -i '1s/$/\nalias hostname="echo $HOSTNAME"/' "${KIBANA_HOME}/bin/kibana"
 chown -R "${KIBANA_USER}:${KIBANA_GROUP}" "$KIBANA_HOME"
 
 # remove unecessary packages and files
-opkg remove shadow-groupadd shadow-useradd
 rm /tmp/opkg-lists/* 
 rm "/${KIBANA_FILE}"
 rm "/${KIBANA_FILE}.sha1"
