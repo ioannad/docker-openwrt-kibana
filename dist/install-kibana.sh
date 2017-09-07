@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # to toggle debugging comment/uncomment the following:
 set -x
@@ -24,7 +24,7 @@ wget -nv "${KIBANA_DOWNLOAD_URL}.sha1"
 SUM=$(cat "/${KIBANA_FILE}.sha1")
 
 # extract hash from sha1sum, because this is how elastic.co stores the sha1 file (!)
-newsum=$(cut -d ' ' -f 1 <<< $(sha1sum "/$KIBANA_FILE"))
+newsum=$(echo $(sha1sum "/${KIBANA_FILE}") | cut -d ' ' -f 1)
 
 if [ "$SUM" == "$newsum" ] && [ "$SUM" != "" ] 
 then echo "SHA1SUM OK"
